@@ -1,0 +1,91 @@
+{
+  "name": "@boulder-js/website",
+  "version": "1.0.0",
+  "description": "BoulderJS Website",
+  "bugs": {
+    "url": "https://github.com/boulder-js/website/issues"
+  },
+  "license": "MIT",
+  "author": "Patrick Heneise <patrick@zentered.co> (https://zentered.co)",
+  "contributors": [
+    "Patrick Heneise (https://github.com/PatrickHeneise)"
+  ],
+  "type": "module",
+    "scripts": {
+    "build": "vinxi build",
+    "dev": "vinxi dev",
+    "gqlgen": "graphql-codegen --config codegen.yml",
+    "lint": "eslint --fix . --ext .js --ext .ts --ext .tsx --ext md",
+    "pretty": "prettier -l --write \"src/**/*.{js,ts,tsx,md,mdx,css,scss}\"",
+    "start": "vinxi start",
+    "test": "true"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,js,tsx,jsx,json,md,yaml}": [
+      "prettier --write"
+    ],
+    "*.{ts,js,tsx,jsx}": [
+      "eslint --cache --fix",
+      "npm run test related"
+    ],
+    "*.{ts,tsx}": [
+      "tsc-files --noEmit"
+    ]
+  },
+  "eslintIgnore": [
+    "/node_modules",
+    "/build",
+    "/public/build"
+  ],
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "dependencies": {
+    "@octokit/auth-app": "^7.1.0",
+    "@octokit/core": "^6.1.2",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.14.1",
+    "@solidjs/start": "^1.0.6",
+    "@tailwindcss/typography": "^0.5.13",
+    "@zentered/issue-forms-body-parser": "^2.2.0",
+    "clsx": "^2.1.1",
+    "graphql": "^16.9.0",
+    "solid-heroicons": "^3.2.4",
+    "solid-js": "^1.8.19",
+    "solid-markdown": "^2.0.13",
+    "solid-start-cloudflare-pages": "^0.3.11",
+    "undici": "^6.19.4",
+    "vinxi": "^0.4.1",
+    "vite-plugin-solid-svg": "^0.8.1"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^19.2.2",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typed-document-node": "^5.0.9",
+    "@graphql-codegen/typescript": "^4.0.9",
+    "@graphql-codegen/typescript-operations": "^4.2.3",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@solidjs/testing-library": "^0.8.9",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-markdown": "^5.1.0",
+    "eslint-plugin-solid": "^0.14.1",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.7",
+    "vite": "^5.3.5",
+    "vite-plugin-solid": "^2.10.2",
+    "wrangler": "^3.67.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
