@@ -19,7 +19,7 @@ export default {
   `,
   vars: {
     organization: process.env.GH_ORG,
-    repository: 'home',
-    announcementCategoryId: 'DIC_kwDOG41Ukc4CBSDX'
+    repository: '.github',
+    announcementCategoryId: 'DIC_kwDOMan6cM4ChIlA'
   }
 }

@@ -14,7 +14,7 @@ jobs:
     uses: ./.github/workflows/unit.yml
 
   deploy:
-    name: Deploy cdc.cy
+    name: Deploy boulderjs.org
     runs-on: ubuntu-latest
     needs: [codequality, unit]
     if: needs.codequality.result == 'success' && needs.unit.result == 'success'

@@ -58,7 +58,7 @@ export default function About() {
         </div>
         <ul role="list">
           <SocialLink
-            href={'https://github.com/cyprus-developer-community'}
+            href={'https://github.com/boulder-js'}
             icon={GitHubIcon}
             class="mt-4"
           >
@@ -72,11 +72,11 @@ export default function About() {
             Follow on LinkedIn
           </SocialLink>
           <SocialLink
-            href="mailto:contact@cdc.cy"
+            href="mailto:contact@boulderjs.org"
             icon={MailIcon}
             class="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
           >
-            contact@cdc.cy
+            contact@boulderjs.org
           </SocialLink>
         </ul>
       </div>

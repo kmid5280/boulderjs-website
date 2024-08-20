@@ -2,7 +2,7 @@ import { For, splitProps, Show, Switch, Match, createMemo } from 'solid-js'
 import { A, createAsync, cache } from '@solidjs/router'
 import clsx from 'clsx'
 import { Container } from '~/components/Container'
-import { GitHubIcon, LinkedInIcon, DiscordIcon } from '~/components/SocialIcons'
+import { GitHubIcon, BlueSkyIcon, DiscordIcon } from '~/components/SocialIcons'
 import graphql from '~/server/graphql.js'
 import fileQuery from '~/graphql/file.query.js'
 import organizationQuery from '~/graphql/organization.query.js'
@@ -126,7 +126,7 @@ function Stats(props) {
         value: props.organization()?.repository?.issues?.totalCount
       },
       {
-        name: 'Cyprus',
+        name: 'Boulder',
         value: '100%'
       }
     ]
@@ -138,7 +138,7 @@ function Stats(props) {
         <div class="mx-auto max-w-2xl lg:max-w-none">
           <div class="text-center">
             <H2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Your Tech Community in Cyprus
+              Your Tech Community in Boulder
             </H2>
             {/* <p class="mt-4 text-lg leading-8 text-gray-600">
               Lorem ipsum dolor sit amet consect adipisicing possimus.
@@ -167,7 +167,7 @@ function Stats(props) {
 const readmeData = cache(async () => {
   'use server'
   const readmeFile = await graphql(fileQuery.gql(), {
-    repository: 'home',
+    repository: '.github',
     path: 'README.md',
     ...fileQuery.vars
   })
@@ -210,17 +210,17 @@ export default function App() {
           </Show>
           <div class="mt-6 flex gap-6">
             <SocialLink
-              href="https://github.com/cyprus-developer-community"
+              href="https://github.com/boulder-js"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              href="https://www.linkedin.com/groups/12659214/"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
+              href="https://bsky.app/profile/boulderjs.org"
+              aria-label="Follow on BlueSky"
+              icon={BlueSkyIcon}
             />
             <SocialLink
-              href="https://chat.cdc.cy"
+              href="https://chat.boulderjs.org"
               aria-label="Join on Discord"
               icon={DiscordIcon}
             />
@@ -242,9 +242,9 @@ export default function App() {
 }
 
 // TODO: CTAs
-// - Subscribe calendar: https://calendar.cdc.cy
-// - Join Discord: https://chat.cdc.cy
-// - Follow on GitHub: https://github.com/cyprus-developer-community
+// - Subscribe calendar: https://calendar.boulderjs.org
+// - Join Discord: https://chat.boulderjs.org
+// - Follow on GitHub: https://github.com/boulder-js
 // - Follow on LinkedIn: https://www.linkedin.com/groups/12659214/
 // - Interact on GitHub to get invited to the organization
 // - Subscribe email: mailerlite
