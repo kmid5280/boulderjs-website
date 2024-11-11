@@ -2,6 +2,5 @@ name = "boulderjs-org"
 compatibility_date = "2023-11-09"
 account_id = "2c1139e40b2ed1b0a3fed3d2204af46f"
 
-main = "./.output/server/index.mjs"
 type = "javascript"
 compatibility_flags = [ "nodejs_compat" ]
