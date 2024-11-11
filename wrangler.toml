@@ -1,5 +1,5 @@
 name = "boulderjs-org"
-compatibilityDate = "2024-11-11"
+compatibility_date = "2024-11-11"
 account_id = "2c1139e40b2ed1b0a3fed3d2204af46f"
 
 main = "./.output/server/index.mjs"
