@@ -8,7 +8,7 @@ export default defineConfig({
     preset: 'cloudflare-pages',
     sourceMap: 'inline',
     rollupConfig: {
-      external: ['node:async_hooks']
+      external: ['__STATIC_CONTENT_MANIFEST', 'node:async_hooks']
     }
     // prerender: {
     //   crawlLinks: true
