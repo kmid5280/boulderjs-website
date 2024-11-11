@@ -60,7 +60,6 @@
     "solid-heroicons": "^3.2.4",
     "solid-js": "^1.9.3",
     "solid-markdown": "^2.0.13",
-    "solid-start-cloudflare-pages": "^0.3.11",
     "undici": "^6.20.1",
     "vinxi": "^0.4.3",
     "vite-plugin-solid-svg": "^0.8.1"
@@ -83,7 +82,7 @@
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.11",
     "vite-plugin-solid": "^2.10.2",
-    "wrangler": "^3.86.0"
+    "wrangler": "^3.86.1"
   },
   "engines": {
     "node": ">=20"

@@ -1,5 +1,5 @@
 import { For, splitProps, Show, Switch, Match, createMemo } from 'solid-js'
-import { A, createAsync, cache } from '@solidjs/router'
+import { A, createAsync, query } from '@solidjs/router'
 import clsx from 'clsx'
 import { Container } from '~/components/Container'
 import { GitHubIcon, BlueSkyIcon, DiscordIcon } from '~/components/SocialIcons'
@@ -164,7 +164,7 @@ function Stats(props) {
   )
 }
 
-const readmeData = cache(async () => {
+const readmeData = query(async () => {
   'use server'
   const readmeFile = await graphql(fileQuery.gql(), {
     repository: '.github',
@@ -174,11 +174,11 @@ const readmeData = cache(async () => {
   return bodyParser(readmeFile.repository.object.text)
 }, 'readmeData')
 
-const organizationData = cache(async () => {
+const organizationData = query(async () => {
   return graphql(organizationQuery.gql, organizationQuery.vars)
 }, 'organizationData')
 
-const eventsData = cache(async () => {
+const eventsData = query(async () => {
   const events = await graphql(issuesQuery.gql, {
     repository: 'events',
     ...issuesQuery.vars
