@@ -164,15 +164,16 @@ function Stats(props) {
   )
 }
 
-// const readmeData = query(async () => {
-//   'use server'
-//   const readmeFile = await graphql(fileQuery.gql(), {
-//     repository: '.github',
-//     path: 'README.md',
-//     ...fileQuery.vars
-//   })
-//   return bodyParser(readmeFile.repository.object.text)
-// }, 'readmeData')
+const readmeData = query(async () => {
+  // 'use server'
+  // const readmeFile = await graphql(fileQuery.gql(), {
+  //   repository: '.github',
+  //   path: 'README.md',
+  //   ...fileQuery.vars
+  // })
+  return {}
+  // return bodyParser(readmeFile.repository.object.text)
+}, 'readmeData')
 
 const organizationData = query(async () => {
   return graphql(organizationQuery.gql, organizationQuery.vars)
@@ -190,24 +191,24 @@ const eventsData = query(async () => {
 }, 'eventsData')
 
 export const route = {
-  preload: () => organizationData()
+  preload: () => readmeData()
 }
 
 export default function App() {
-  const events = createAsync(eventsData)
-  // const readme = createAsync(readmeData)
-  const organization = createAsync(organizationData)
+  const readme = createAsync(() => readmeData())
+  const events = createAsync(() => eventsData())
+  const organization = createAsync(() => organizationData())
 
   return (
     <>
       <Container class="mt-9">
         <div class="max-w-2xl">
           <H1>{organization()?.organization.name}</H1>
-          {/* <Show when={readme}>
+          <Show when={readme}>
             <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
               {readme()?.about?.content}
             </p>
-          </Show> */}
+          </Show>
           <div class="mt-6 flex gap-6">
             <SocialLink
               href="https://github.com/boulder-js"
@@ -232,9 +233,9 @@ export default function App() {
       <Container class="bg-white py-24 sm:py-32">
         <H2>Upcoming Events</H2>
         <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {/* <For each={events()?.repository?.issues.nodes}>
+          <For each={events()?.repository?.issues.nodes}>
             {(node) => <EventBox event={node} />}
-          </For> */}
+          </For>
         </div>
       </Container>
     </>
