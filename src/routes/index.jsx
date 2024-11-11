@@ -66,7 +66,7 @@ function EventBox(props) {
             </Match>
             <Match when={!issueData()['featured-image']?.images?.[0]}>
               <img
-                src="/assets/cdc-logo.svg"
+                src="/assets/boulderjs-logo.png"
                 alt="BoulderJS Logo"
                 class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-contain sm:aspect-[2/1] lg:aspect-[3/2]"
               />

@@ -52,7 +52,7 @@ export default function Event() {
         </Match>
         <Match when={!issueData()?.parsedBody['featured-image']?.images}>
           <img
-            src="/assets/cdc-logo.svg"
+            src="/assets/boulderjs-logo.png"
             alt="CDC logo"
             sizes="(min-width: 1024px) 32rem, 20rem"
             class="aspect-square rotate-3 rounded-2xl object-cover"

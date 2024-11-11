@@ -50,7 +50,7 @@ export default function About() {
       <div class="flex min-w-full">
         <div class="w-1/3 mr-8">
           <img
-            src="/assets/cdc-logo.svg"
+            src="/assets/boulderjs-logo.png"
             alt="CDC Logo"
             sizes="(min-width: 1024px) 32rem, 20rem"
             class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-contain dark:bg-zinc-800"

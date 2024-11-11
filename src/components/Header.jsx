@@ -73,7 +73,7 @@ export function Header() {
         <A href="/" class="-m-1.5 p-1.5">
           <span class="sr-only">BoulderJS</span>
           <img
-            src="/assets/cdc-logo.svg"
+            src="/assets/boulderjs-logo.png"
             width="100%"
             height="100%"
             class="w-24 h-24"
