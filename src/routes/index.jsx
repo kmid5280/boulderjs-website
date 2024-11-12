@@ -4,10 +4,7 @@ import clsx from 'clsx'
 import { Container } from '~/components/Container'
 import { GitHubIcon, BlueSkyIcon, DiscordIcon } from '~/components/SocialIcons'
 import graphql from '~/server/graphql.js'
-import fileQuery from '~/graphql/file.query.js'
 import organizationQuery from '~/graphql/organization.query.js'
-import issuesQuery from '~/graphql/upcoming-events.query.js'
-import bodyParser from '@zentered/issue-forms-body-parser'
 import { H1, H2, H3 } from '~/components/Atomic'
 
 function Photos() {
@@ -48,155 +45,24 @@ function SocialLink(props) {
   )
 }
 
-function EventBox(props) {
-  const [local] = splitProps(props, ['event'])
-  const issueData = createMemo(() => local.event.parsed)
-
-  return (
-    <article class="flex flex-col items-start justify-between">
-      <A href={`/events/${local.event.number}`}>
-        <div class="relative w-full">
-          <Switch>
-            <Match when={issueData()['featured-image']?.images?.[0]}>
-              <img
-                src={issueData()['featured-image']?.images?.[0]?.src}
-                alt={issueData()['featured-image']?.images?.[0]?.alt}
-                class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
-              />
-            </Match>
-            <Match when={!issueData()['featured-image']?.images?.[0]}>
-              <img
-                src="/assets/boulderjs-logo.png"
-                alt="BoulderJS Logo"
-                class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-contain sm:aspect-[2/1] lg:aspect-[3/2]"
-              />
-            </Match>
-          </Switch>
-          <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
-        </div>
-      </A>
-      <div class="max-w-xl">
-        <div class="mt-8 flex items-center gap-x-4 text-xs">
-          <time dateTime={issueData().date.date} class="text-gray-500">
-            {issueData().date.date}
-          </time>
-        </div>
-        <div class="group relative">
-          <H3>
-            <a href={local.event.href}>
-              <span class="absolute inset-0" />
-              <A href={`/events/${local.event.number}`}>{local.event.title}</A>
-            </a>
-          </H3>
-        </div>
-        {/* <div class="relative mt-8 flex items-center gap-x-4">
-          <img
-            src={props.event.author.imageUrl}
-            alt=""
-            class="h-10 w-10 rounded-full bg-gray-100"
-          />
-          <div class="text-sm leading-6">
-            <p class="font-semibold text-gray-900">
-              <a href={props.event.author.href}>
-                <span class="absolute inset-0" />
-                {props.event.author.name}
-              </a>
-            </p>
-          </div>
-        </div> */}
-      </div>
-    </article>
-  )
-}
-
-function Stats(props) {
-  const stats = createMemo(() => {
-    return [
-      {
-        name: 'GitHub Organization Members',
-        value: props.organization()?.organization?.membersWithRole?.totalCount
-      },
-      {
-        name: 'Users on Discord',
-        value: '300+'
-        // TODO: get this via api
-      },
-      {
-        name: 'Events',
-        value: props.organization()?.repository?.issues?.totalCount
-      },
-      {
-        name: 'Boulder',
-        value: '100%'
-      }
-    ]
-  })
-
-  return (
-    <div class="bg-white py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:max-w-none">
-          <div class="text-center">
-            <H2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Your Tech Community in Boulder
-            </H2>
-            {/* <p class="mt-4 text-lg leading-8 text-gray-600">
-              Lorem ipsum dolor sit amet consect adipisicing possimus.
-            </p> */}
-          </div>
-          <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-            <For each={stats()}>
-              {(stat) => (
-                <div class="flex flex-col bg-gray-400/5 p-8">
-                  <dt class="text-sm font-semibold leading-6 text-gray-600">
-                    {stat.name}
-                  </dt>
-                  <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">
-                    {stat.value}
-                  </dd>
-                </div>
-              )}
-            </For>
-          </dl>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-const readmeData = query(async () => {
-  // 'use server'
-  // const readmeFile = await graphql(fileQuery.gql(), {
-  //   repository: '.github',
-  //   path: 'README.md',
-  //   ...fileQuery.vars
-  // })
-  return {}
-  // return bodyParser(readmeFile.repository.object.text)
-}, 'readmeData')
-
 const organizationData = query(async () => {
+  'use server'
+
   return graphql(organizationQuery.gql, organizationQuery.vars)
+  // return {
+  //   organization: {
+  //     name: 'BoulderJS'
+  //   }
+  // }
 }, 'organizationData')
 
-const eventsData = query(async () => {
-  const events = await graphql(issuesQuery.gql, {
-    repository: 'events',
-    ...issuesQuery.vars
-  })
-  for (const event of events.repository.issues.nodes) {
-    event.parsed = await bodyParser(event?.body)
-  }
-  return events
-}, 'eventsData')
-
 export const route = {
-  preload: () => readmeData()
+  preload: () => organizationData()
 }
 
 export default function App() {
-  const readme = createAsync(() => readmeData())
-  const events = createAsync(() => eventsData())
+  // const readme = createAsync(() => readmeData())
+  // const events = createAsync(() => eventsData())
   const organization = createAsync(() => organizationData())
 
   return (
@@ -204,11 +70,11 @@ export default function App() {
       <Container class="mt-9">
         <div class="max-w-2xl">
           <H1>{organization()?.organization.name}</H1>
-          <Show when={readme}>
+          {/* <Show when={readme}>
             <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
               {readme()?.about?.content}
             </p>
-          </Show>
+          </Show> */}
           <div class="mt-6 flex gap-6">
             <SocialLink
               href="https://github.com/boulder-js"
@@ -229,13 +95,13 @@ export default function App() {
         </div>
       </Container>
       <Photos />
-      <Stats organization={organization} />
+      {/* <Stats organization={organization} /> */}
       <Container class="bg-white py-24 sm:py-32">
         <H2>Upcoming Events</H2>
         <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          <For each={events()?.repository?.issues.nodes}>
+          {/* <For each={events()?.repository?.issues.nodes}>
             {(node) => <EventBox event={node} />}
-          </For>
+          </For> */}
         </div>
       </Container>
     </>

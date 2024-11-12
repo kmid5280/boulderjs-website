@@ -5,6 +5,7 @@ export const H1 = (props) => {
     </h1>
   )
 }
+
 export const H2 = (props) => {
   return (
     <h2 class="text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-3xl">

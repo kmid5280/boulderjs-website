@@ -9,6 +9,3 @@ compatibility_flags = [ "nodejs_compat" ]
 rules = [
   { type = "ESModule", globs = ["**/*.js", "**/*.mjs"]},
 ]
-
-[site]
-bucket = ".output/public"
