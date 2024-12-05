@@ -96,6 +96,16 @@ export default function App() {
       </Container>
       <Photos />
       {/* <Stats organization={organization} /> */}
+      <div>
+        <iframe 
+          src="https://discord.com/widget?id=1083149430540206120&theme=dark" 
+          width="350" 
+          height="500" 
+          allowtransparency="true" 
+          frameborder="0" 
+          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">  
+        </iframe>
+      </div>
       <Container class="bg-white py-24 sm:py-32">
         <H2>Upcoming Events</H2>
         <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
